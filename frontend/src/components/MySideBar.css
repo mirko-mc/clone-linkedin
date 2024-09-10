@@ -1,0 +1,48 @@
+#sideContainer{
+    margin-top: 1.4em;
+    background-color: white;
+    border-radius: 1em;
+    border: 1px solid #ededed;
+    min-width: min-content;
+}
+
+.profiliSimili{
+    margin-bottom: 0,5rem; 
+}
+
+.imgProfile{
+    width:50px; 
+    height:50px;
+}
+
+
+.containerText{
+    width: 70%;
+}
+
+.nameProfile{
+    font-size: 1 rem;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.titleProfile{
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.detailsBtn{
+    margin-top: 0.5rem;
+    margin-left: 10px;
+    width: 100px;
+    border-radius: 50px !important;
+    border: #181818 1px solid !important;
+    color: #181818 !important;
+}
+
+.detailsBtn:hover{
+    background-color: #F3F3F3 !important;
+    border: #181818 2px solid !important;
+}

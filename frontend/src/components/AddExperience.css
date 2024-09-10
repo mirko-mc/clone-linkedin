@@ -1,0 +1,42 @@
+#addExperience{
+    margin-top: 1em;
+    border: 1px solid grey;
+    border-radius: 1em;
+    background-color: white;
+    padding: 1em;
+}
+
+#addExperience button:first-of-type{
+    width: 100%;
+}
+
+.topRow, .datesRow{
+    display: flex;
+    gap: 1em;
+}
+
+.topRow, .datesRow{
+    padding-bottom: 1em;
+}
+
+.topRow div, .datesRow div{
+    flex-grow: 1;
+}
+
+.descriptionRow{
+    display: flex;
+    padding: 1em 0 0;
+    align-items: center;
+}
+
+.descriptionRow div{
+    flex-grow: 1;
+}
+
+.textarea{
+    width: 100% !important;
+}
+
+#saveButton{
+    width: 100%;
+}
