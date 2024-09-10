@@ -1,0 +1,163 @@
+.icon-text {
+  font-size: 11px;
+}
+
+.rounded-circle1 {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
+.input-search {
+  border-radius: 10px;
+  border: none;
+  width: 15rem;
+  margin-top: 0.6rem;
+}
+
+.divSearch {
+  width: 20rem;
+}
+
+.bg-body{
+  height: 4rem;
+}
+
+.icons {
+  width: 5rem;
+}
+
+.icon-text-s {
+  font-size: 11px;
+  margin-top: -0.7rem;
+}
+
+.border-left {
+  border-left: 1px solid rgb(182, 180, 180);
+  margin-left: 1rem;
+}
+
+.icon-text-s2 {
+  font-size: 11px;
+  margin-top: -0.7rem;
+  margin-left: 2.5rem;
+  width: 7rem;
+}
+
+.premium{
+  margin-top: "10px";
+  width: "11rem";
+  text-align: "center";
+}
+
+.premium2{
+    color: #5C3B09;
+    text-decoration: underline;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.rounded-circle2 {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.dropDownName{
+  font-weight: 500;
+}
+
+.dropDownTitle{
+  font-size: 14px;
+  margin-top: -0.7rem;
+}
+
+.dropDownButton{
+  width: 14rem !important;
+  background-color: white !important;
+  color: #0A66C2 !important;
+  border-radius: 20px !important;
+  border: solid 2px #0A66C2 !important;
+  border-color: #0A66C2 !important;
+  padding: 0rem !important;
+}
+
+.dropDownButton:hover{
+  background-color: #0A66C2 !important;
+  color: white !important;
+}
+
+.dropDownLink{
+  color: #A0A0A0;
+  font-size: 14px;
+}
+
+.non-click {
+  pointer-events: none;
+}
+
+.click{
+  pointer-events: auto;
+}
+
+.dropDownLink:hover{
+  text-decoration: underline;
+}
+
+.dropDownItem:active, .dropDownItem:hover {
+  background-color: transparent !important;
+}
+
+.navbar-nav .dropdown-menu {
+  margin-top: 2rem !important;
+}
+
+@media  (max-width: 576px) {
+  .icons {
+      width: 2rem;
+  }
+  .divSearch, .icon-text-s2, .non-visible, .premium2, .icon-text, .icon-text-s {
+    display: none;
+  }
+  .logo {
+    height: 4rem;
+    width: 2rem;
+  }
+  .border-left {
+    border-left: 0px;
+   
+  }
+ 
+}
+
+@media  (min-width: 576px) and (max-width: 768px) {
+  .icons {
+      width: 3rem;
+  }
+  .divSearch, .icon-text-s2, .non-visible, .premium2, .icon-text, .icon-text-s {
+    display: none;
+  }
+  .logo {
+    height: 4rem;
+    width: 2rem;
+  }
+  .border-left {
+    border-left: 0px;
+    
+  }
+}
+
+@media  (min-width: 768px) and (max-width: 992px) {
+  .divSearch, .icon-text-s2, .non-visible, .premium2{
+    display: none;
+  }
+  .border-left {
+    border-left: 0px;
+   
+  }
+}
