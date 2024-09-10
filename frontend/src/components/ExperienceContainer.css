@@ -1,0 +1,11 @@
+#experienceContainer{
+    border: 1px solid grey;
+    border-radius: 1em;
+    margin-top: 1em;
+    min-width: min-content;
+    background-color: white;
+}
+
+#experienceContainer h5{
+    margin: 1em 0.5em;
+}

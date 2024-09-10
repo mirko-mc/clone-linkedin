@@ -1,0 +1,109 @@
+#profileContainer{
+    margin-top: 1.5em;
+    border: 1px solid gray;
+    border-radius: 1em;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: min-content;
+    background-color: white;
+}
+
+#upperSection{
+    width: 100%;
+    background-image: url('https://images.unsplash.com/photo-1444090542259-0af8fa96557e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    border-radius: 1em 1em 0 0;
+    height: 25vh;
+    position: relative;
+}
+
+#editPhoto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 0.5em;
+    position: absolute;
+    right: 2%;
+    top: 6%;
+    background-color: white;
+
+}
+
+#mainImgWrapper{
+    width: 10em;
+    border-radius: 50%;
+    bottom: 80%;
+}
+
+#innerImgWrapper{
+    width: 100%;
+    position: relative;
+}
+#innerImgWrapper img{
+    width: 100%;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -2.5em;
+    left: 1em;
+}
+
+#innerImgWrapper svg{
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+    bottom: -2.5em;
+    left: 1em;
+    overflow: visible;
+}
+
+.imgForm{
+    position: absolute;
+    bottom: 0em;
+    left: 13em; 
+}
+
+#lowerSection{
+    padding-top: 3.5em;
+    padding-left: 1em;
+}
+
+#lowerSection h5{
+    font-weight: bolder !important;
+    margin: 0;
+}
+
+#lowerSection p:nth-child(2) {
+    color: grey;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+#lowerSection p:nth-child(3) {
+    color: #A4A4A4;
+    
+}
+
+#buttons{
+    padding-left: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+#buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    gap: 0.5em;
+}
+
+#buttons button:nth-child(2) {
+    background-color: white;
+    color: black;
+    border: 1.2px solid black
+    
+}
