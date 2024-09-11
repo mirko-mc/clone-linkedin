@@ -4,7 +4,7 @@ const ExperiencesRouter = express.Router();
 
 // TODO GET /:userld/experiences => ritorna TUTTE le esperienze di un utente
 ExperiencesRouter.get(
-  "/:userld/experiences",
+  "/:userId/experiences",
   ExperiencesController.GetAllExperiences
 );
 // TODO GET /me/experiences => ritorna le esperienze dell'utente loggato
@@ -14,13 +14,19 @@ ExperiencesRouter.get(
 );
 // TODO POST /experiences => crea una nuova esperienza per l'utente loggato
 ExperiencesRouter.post("/experiences", ExperiencesController.PostNewExperience);
-// TODO PUT /:expId => caricamento immagine per esperienza
-ExperiencesRouter.put(
-  "/:expId",
-  ExperiencesController.PutUploadExperienceImage
+// TODO PATCH /:userId/experiences/:expId => caricamento immagine per esperienza
+ExperiencesRouter.patch(
+  "/:userId/experiences/:expId",
+  ExperiencesController.PatchUploadExperienceImage
 );
-// TODO EX : PUT /:expId => modifica le esperienze
-ExperiencesRouter.put("/:expId", ExperiencesController.PutUpdateExperience);
-// TODO EX : DELETE /:expId => elimina le esperienze
-ExperiencesRouter.delete("/:expId", ExperiencesController.DeleteExperience);
+// TODO EX : PUT /:userId/experiences/:expId => modifica le esperienze
+ExperiencesRouter.put(
+  "/:userId/experiences/:expId",
+  ExperiencesController.PutUpdateExperience
+);
+// TODO EX : DELETE /:userId/experiences/:expId => elimina le esperienze
+ExperiencesRouter.delete(
+  "/:userId/experiences/:expId",
+  ExperiencesController.DeleteExperience
+);
 export default ExperiencesRouter;

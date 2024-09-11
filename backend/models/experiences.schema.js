@@ -30,7 +30,7 @@ const ExperiencesSchema = new Schema({
     trim: true,
     required: true,
   },
-  profileId: {
+  userId: {
     type: String,
     required: true,
   },
