@@ -17,3 +17,13 @@ ENDPOINT ESPERIENZE
 - PUT /:expId => caricamento immagine per esperienza
 - EX : PUT, DELETE /:expId => modifica a elimina le esperienze
 Le immagini andranno caricate tramite multer
+
+Modello esperienze BW4
+{
+  "role": "CTO",
+  "company": "Strive School",
+  "startDate": "2019-06-16",
+  "endDate": "2019-06-16", // null se ancora in corso
+  "description": "Doing stuff",
+  "area": "Berlin",
+}

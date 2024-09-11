@@ -1,0 +1,16 @@
+@baseurl="http://localhost:5000/api/v1"
+
+POST {{baseurl}}/:profileId/experiences/
+Content-Type: application/json
+
+{
+  "experienceId": "",
+  "profileId": "",
+  "role": "RUOLO",
+  "company": "AZIEND",
+  "startDate": "2000-02-02",
+  "endDate": null,
+  "description": "DECRIZIONE",
+  "area": "PAESE",
+  "image": "IMMAGINE"
+}
