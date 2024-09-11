@@ -1,0 +1,27 @@
+
+POST http://localhost:5000/api/v1/profiles
+Content-Type: application/json
+
+{
+    "name": "Christian",
+    "surname": "Olivieri",
+    "age": 31,
+    "email": "christian.olivieri@it.it",
+    "password": "PASSWORD",
+    "avatar": "IMMAGINE",
+    "approved": true
+}
+
+###
+GET http://localhost:5000/api/v1/profiles
+
+###
+GET http://localhost:5000/api/v1/profiles/66e1b2da5b15e1185011e7dd
+
+###
+PUT http://localhost:5000/api/v1/profiles/66e1b2da5b15e1185011e7dd
+Content-Type: application/json
+
+{
+    "password": "nuova-psw2"
+}

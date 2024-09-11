@@ -1,33 +1,37 @@
 import { createContext, useEffect, useState } from "react";
-import {getMeUrl} from '../../fetchUrls'
-// questo è il contesto a tutti gli effetti
-export const UserContext = createContext()
+import { getMeUrl } from '../../fetchUrls';
 
+export const UserContext = createContext();
 
-// la funzione invece è un componente dove all'interno uso il provider
 export function UserContextProvider({ children }) {
-    const [selectedUser, setSelectedUser] = useState(null)
-    const value = {selectedUser, setSelectedUser}
+    const [token, setToken] = useState(localStorage.getItem("token")); // Aggiungo gestione del token
+    const [selectedUser, setSelectedUser] = useState(null);
+    const value = { selectedUser, setSelectedUser, token, setToken }; // rendo "disponibile" token e setToken
     const apiKey = process.env.REACT_APP_APIKEY;
 
     const loadMeUser = async () => {
-        const resp = await fetch(getMeUrl
-            , {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": apiKey
-                }
-            }
-        )
+        if (!token) return; // Non carico l'utente se non c'è un token
 
-        const data = await resp.json()
-        setSelectedUser(data)
-    }
-    // con le graffe attorno a loadMeUser sto eliminando il retrun automatico che è implicito 
-    // nella arrow function senza graffe. le tonde le devo inserire perchè se no la funzione 
-    // non viene richiamata in automatico
-    useEffect(() => {loadMeUser()}, [])
+        const resp = await fetch(getMeUrl, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            setSelectedUser(data);
+        } else {
+            setToken(null); // Resetto il token se c'è un errore
+            localStorage.removeItem('token');
+        }
+    };
+
+    useEffect(() => {
+        loadMeUser();
+    }, [token]);
 
     return (
         <UserContext.Provider value={value}>
