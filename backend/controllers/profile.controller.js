@@ -42,6 +42,7 @@ export const putProfile = async (req, res) => {
     if (!updateProfile) {
       return res.status(404).send({ error: "Profile not found" });
     }
+    res.send(updateProfile)
   } catch (err) {
     console.log(err);
     res.status(400).send({ error: "Something went wrong" });
@@ -59,6 +60,7 @@ export const editAvatar = async (req, res) => {
     if (!updateProfile){
       return res.status(404).send ({ error: "Profile not found"})
     }
+    res.send (updateProfile)
   } catch (err){
     {
       console.log(err);

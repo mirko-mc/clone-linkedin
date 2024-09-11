@@ -4,18 +4,19 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 import "dotenv/config";
 
 
-export default multer({
-    storage: new CloudinaryStorage({
+const uploadCloudinary = multer({
+  storage: new CloudinaryStorage({
       cloudinary,
-      params: {
-        folder: "epicode",
-        CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
-        CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
-        CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+      params:{
+          folder: "epicode",
+          cloud_name: process.env.CLOUDINARY_NAME,
+          api_key: process.env.CLOUDINARY_API_KEY,
+          api_secret: process.env.CLOUDINARY_API_SECRET
       },
-    }),
-  });
+  }),
+});
 
+export default uploadCloudinary
 
 
 

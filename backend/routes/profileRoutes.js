@@ -1,5 +1,6 @@
 import express from "express"
 import * as profileController from "../controllers/profile.controller.js"
+import uploads from "../middlewares/uploads.js"
 
 const route = express.Router()
 
@@ -16,6 +17,6 @@ route.post("/", profileController.createProfile)
 route.put("/:id", profileController.putProfile)
 
 //modifica dell'avatar
-route.patch("/:id/avatar", profileController.editAvatar)
+route.patch("/:id/avatar", uploads.single("avatar"), profileController.editAvatar)
 
 export default route

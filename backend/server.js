@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
-import moongoose from "mongoose";
+import mongoose from "mongoose";
 import "dotenv/config";
 import morgan from "morgan";
 import helmet from "helmet";
 import endpoints from "express-list-endpoints";
 import ExperiencesRouter from "./routes/experiences.routes.js";
+import ProfileRouter from "./routes/profileRoutes.js";
 
 // * configuro il server
 /** dichiaro il dominio */
@@ -39,8 +40,9 @@ Server.use(cors());
 Server.use(express.json());
 // * rotte
 Server.use("/api/v1", ExperiencesRouter);
+Server.use("/api/v1/profiles", ProfileRouter);
 // * connessione al database
-await moongoose
+await mongoose
   .connect(process.env.MONGO_CONNECTION_URI)
   .then(() => {
     console.log("database connected");
