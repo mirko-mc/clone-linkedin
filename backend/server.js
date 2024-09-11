@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors'
 import morgan from 'morgan';
 import helmet from 'helmet'
-// import authenticationRouter from './routes/authenticationRoutes.js';
+import authenticationRouter from './routes/authenticationRoutes.js'
+import route from './routes/profileRoutes.js';
 import passport from 'passport';
 // import googleStrategy from './config/passport.config.js';
 // import authorization from './middleware/authorization.js';
@@ -25,8 +26,8 @@ server.use(express.json())// è un middleware che ci dice tutti i body che invie
 server.use(cors()) // è un middleware che consente la connessione tra backend e frontend
 server.use(morgan("dev"))// è un middleware che mi mostra tutti i log delle richieste
 server.use(helmet ())//middleware che ci da la sicurezza per il backend
-
-// server.use("/auth",authenticationRouter)
+server.use('/users', route)//rotta per i profili
+server.use("/auth",authenticationRouter)//rotta per l'autenticazione
 
 
 server.listen(port, ()=>{

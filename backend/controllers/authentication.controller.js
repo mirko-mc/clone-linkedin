@@ -4,11 +4,11 @@ import bcrypt from 'bcrypt';
 
 export const register = async (req,res) =>{
     //verificare che la mail non sia già utilizzata
-    const profile = await Profile.findOne({email: req.body.email});
+    const user = await Profile.findOne({email: req.body.email});
     //se esiste ritorna errore
-    if (profile) return res.status(500).send('Email already exists')
+    if (user) return res.status(500).send('Email already exists')
     // se non è usata allora salviamo il nuovo utente con la password hashata
-    const newProfile = new Profile({
+    const newUser = new Profile({
         name: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
@@ -18,23 +18,23 @@ export const register = async (req,res) =>{
         verifiedAt: new Date()
     });
 
-    const profileCreated = await newProfile.save()
-    res.send(profileCreated);
+    const userCreated = await newUser.save()
+    res.send(userCreated);
 }
 
 export const login = async (req,res) => {
     //cercare la mail nel db
-    const profile = await Profile.findOne({email: req.body.email}).select('+password')//la select mi fa prendere tutto più il campo password
+    const user = await Profile.findOne({email: req.body.email}).select('+password')//la select mi fa prendere tutto più il campo password
     //se non trova la mail
-    if(!profile) return res.status(401).send('Incorrect Credentials')
+    if(!user) return res.status(401).send('Incorrect Credentials')
     //se trova la mail
-    if(!(await bcrypt.compare(req.body.password, profile.password))){
+    if(!(await bcrypt.compare(req.body.password, user.password))){
         return res.status(401).send('Incorrect Credentials')
     }
 
     //se la password è corretta allora generare il jwt e lo restituiamo
     jwt.sign(
-        {profileId: profile.id},
+        {userId: user.id},
         process.env.JWT_SECRET,
         {
             expiresIn: '1h'
@@ -49,7 +49,7 @@ export const login = async (req,res) => {
 }
 
 export const me = async(req,res) =>{
-    return res.send(req.loggedProfile)
+    return res.send(req.loggedUser)
 }
 
 

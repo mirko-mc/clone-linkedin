@@ -20,11 +20,11 @@ export default (req, res, next) =>{
         const user = await Profile.findById(payload.userId)//.select('-password');
 
         //l'utente potrebbe aver eliminato l'account nel frattempo quindi non esistere più nel db
-        if (!user) return res.status(401).send('autore eliminato');
+        if (!user) return res.status(401).send('user eliminato');
 
         //aggiungiamo i dati dell'utente loggato all'oggetto req in maniera da
         //essere utilizzabili dai middlwares successivi in caso ne avessero bisogno
-        req.loggedProfile = user
+        req.loggedUser = user
         console.log(user)
 
         //chiamiamo il prossimo middleware

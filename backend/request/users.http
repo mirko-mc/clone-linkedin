@@ -1,0 +1,21 @@
+@baseUrl= http://localhost:5000/users
+
+GET {{baseUrl}}
+
+###
+
+GET {{baseUrl}}/66e161f372d556c0d5f9ee87
+
+###
+
+POST {{baseUrl}}
+Content-Type: application/json
+ 
+{
+    "name": "Christian",
+      "surname": "Olivieri",
+      "email": "chri@olivieri.com",
+      "avatar": "",
+      "password":"987654",
+      "age": "30"
+} 
