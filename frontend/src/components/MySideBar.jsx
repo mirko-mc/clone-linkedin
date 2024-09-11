@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import './MySideBar.css';
 import { Container } from "react-bootstrap";
+import { UserContext } from './contexts/UserContextProvider'; // Importa il contesto
 
 function MySideBar() {
   const [data, setData] = useState([]);
-  const apiKey = process.env.REACT_APP_APIKEY
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://striveschool-api.herokuapp.com/api/profile/`,
-          {
-            headers: {
-              Authorization: apiKey
-            },
-          }
-        );
-        const result = await response.json();
-        // console.log(result); // console.log per vedere i dati recuperati
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const apiKey = process.env.REACT_APP_APIKEY;
+  const { token } = useContext(UserContext); // Accedi al token dal contesto
 
-    fetchData();
-  }, []);
+  useEffect(() => {
+    if (token) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://striveschool-api.herokuapp.com/api/profile/`,
+            {
+              headers: {
+                Authorization: apiKey
+              },
+            }
+          );
+          const result = await response.json();
+          setData(result);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [token]); // Eseguo fetch solo se c'è il token
 
   return (
     <Container id="sideContainer">
@@ -66,9 +69,7 @@ function MySideBar() {
             </div>
             <hr></hr>
           </section>
-          
         ))}
-        
       </div>
     </Container>
   );
