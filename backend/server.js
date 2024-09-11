@@ -5,12 +5,13 @@ import "dotenv/config";
 import morgan from "morgan";
 import helmet from "helmet";
 import endpoints from "express-list-endpoints";
+import ExperiencesRouter from "./routes/experiences.routes.js";
 
 // * configuro il server
+/** dichiaro il dominio */
+const Host = process.env.HOST;
 /** dichiaro la porta */
 const Port = process.env.PORT || 5000;
-/** dichiaro il dominio */
-const Host = process.env.HOST || `http://localhost:${Port}`;
 /** dichiaro il server */
 const Server = express();
 /** rafforzo la sicurezza degli headers */
@@ -37,6 +38,7 @@ Server.use(cors());
 /** utilizzo il body parser */
 Server.use(express.json());
 // * rotte
+Server.use("/api/v1", ExperiencesRouter);
 // * connessione al database
 await moongoose
   .connect(process.env.MONGO_CONNECTION_URI)
