@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import ExperiencesSchema from "./experiences.schema.js";
 
 const ProfileSchema = new Schema(
   {
@@ -31,6 +32,7 @@ const ProfileSchema = new Schema(
     },
     approved: Boolean,
     verifiedAt: Date,
+    experiences: [ExperiencesSchema]
   },
   {
     collection: "profiles",

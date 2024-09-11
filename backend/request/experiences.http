@@ -1,16 +1,35 @@
-@baseurl="http://localhost:5000/api/v1"
+@baseurl=http://localhost:5000/api/v1
 
-POST {{baseurl}}/:profileId/experiences/
+### crea esperienza
+POST http://localhost:5000/api/v1/experiences
 Content-Type: application/json
 
 {
-  "experienceId": "",
-  "profileId": "",
-  "role": "RUOLO",
-  "company": "AZIEND",
-  "startDate": "2000-02-02",
-  "endDate": null,
-  "description": "DECRIZIONE",
-  "area": "PAESE",
-  "image": "IMMAGINE"
+  "userId": "66e1daf1158b9ea673101bc3",
+  "role": "RUOLO3",
+  "company": "AZIENDA3",
+  "startDate": "2010-02-02",
+  "endDate": "2020-02-02",
+  "description": "DECRIZIONE3",
+  "area": "PAESE3"
 }
+
+### get all experiences
+GET http://localhost:5000/api/v1/66e1daf1158b9ea673101bc3/experiences
+
+### GET /me/experiences => ritorna le esperienze dell'utente loggato
+GET http://localhost:5000/api/v1/me/experiences
+
+### PATCH /:userId/experiences/:expId => caricamento immagine per esperienza
+PUT http://localhost:5000/api/v1/:expId
+
+### EX : PUT /:userId/experiences/:expId => modifica le esperienze
+PUT http://localhost:5000/api/v1/66e1daf1158b9ea673101bc3/experiences/66e1e27d52a4e87cd5119f68
+Content-Type: application/json
+
+{
+  "description": "AZIENDA"
+}
+
+### EX : DELETE /:userId/experiences/:expId => elimina le esperienze
+DELETE http://localhost:5000/api/v1/66e1daf1158b9ea673101bc3/experiences/66e1e27d52a4e87cd5119f68
