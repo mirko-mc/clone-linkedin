@@ -1,0 +1,27 @@
+@baseUrl= http://localhost:5000/auth
+
+POST {{baseUrl}}/register
+Content-Type: application/json
+ 
+{
+    "name": "Christian",
+      "surname": "Olivieri",
+      "email": "christian@olivieri.com",
+      "avatar": "",
+      "password":"12345"
+} 
+
+###
+
+POST {{baseUrl}}/login
+Content-Type: application/json
+ 
+{
+      "email": "christian@olivieri.com",
+      "password":"12345"
+} 
+
+###
+
+GET {{baseUrl}}/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmUxNjI5ODcyZDU1NmMwZDVmOWVlOGIiLCJpYXQiOjE3MjYwNzk1MTYsImV4cCI6MTcyNjA4MzExNn0.8OH8TG7-gxOuscXo7fKbpAXIwDEDfviMNXn3FTXXw_g

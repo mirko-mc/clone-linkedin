@@ -25,7 +25,7 @@ export const createProfile = async (req, res) => {
     console.log(savedProfile);
     return res.status(201).send(savedProfile);
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.status(400).send({ error: "Something went wrong" });
   }
 };

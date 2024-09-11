@@ -23,7 +23,8 @@ const ProfileSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
+      select: false
     },
     avatar: {
       type: String,
