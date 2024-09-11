@@ -1,0 +1,29 @@
+- implementa login usando JWT
+- EX : implementa login con Google
+- EX : collega backend al frontend
+
+ENDPOINT per la PAGINA PROFILO :
+- GET /profile => Ritorna TUTTI profili
+- GET /me => ritorna il profilo dell'utente loggato
+- POST /profile => crea un nuovo profilo
+- PUT /:id/image => Caricamento immagine profilo
+- PUT /:id => Modifica un profilo // ACCESSIBILE SOLO SE E' IL PROPRIO PROFILO!
+Le immagini dovranno essere caricate tramite multer
+
+ENDPOINT ESPERIENZE
+- GET /:userld/experiences => ritorna TUTTE le esperienze di un utente
+- GET /me/experiences => ritorna le esperienze dell'utente loggato
+- POST /experiences => crea una nuova esperienza per l'utente loggato
+- PUT /:expId => caricamento immagine per esperienza
+- EX : PUT, DELETE /:expId => modifica a elimina le esperienze
+Le immagini andranno caricate tramite multer
+
+Modello esperienze BW4
+{
+  "role": "CTO",
+  "company": "Strive School",
+  "startDate": "2019-06-16",
+  "endDate": "2019-06-16", // null se ancora in corso
+  "description": "Doing stuff",
+  "area": "Berlin",
+}
