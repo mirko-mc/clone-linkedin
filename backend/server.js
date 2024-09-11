@@ -7,6 +7,10 @@ import helmet from "helmet";
 import endpoints from "express-list-endpoints";
 import ExperiencesRouter from "./routes/experiences.routes.js";
 import ProfileRouter from "./routes/profileRoutes.js";
+import authenticationRouter from './routes/authenticationRoutes.js'
+import passport from 'passport';
+import googleStrategy from './config/passport.config.js';
+// import authorization from './middleware/authorization.js';
 
 // * configuro il server
 /** dichiaro il dominio */
@@ -39,8 +43,12 @@ Server.use(cors());
 /** utilizzo il body parser */
 Server.use(express.json());
 // * rotte
+
+passport.use('google', googleStrategy)//non è un middleware ma serve per dire a passport di usare la strategia
+
 Server.use("/api/v1", ExperiencesRouter);
 Server.use("/api/v1/profiles", ProfileRouter);
+Server.use("/auth",authenticationRouter)//rotta per l'autenticazione
 // * connessione al database
 await mongoose
   .connect(process.env.MONGO_CONNECTION_URI)
