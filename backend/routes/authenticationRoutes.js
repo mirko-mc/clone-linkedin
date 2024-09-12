@@ -2,11 +2,11 @@ import express from 'express';
 import { callbackGoogle} from '../controllers/authentication.controller.js';
 import authorization from '../middlewares/authorization.js';
 import passport from 'passport';
-// import uploadCloudinary from '../middleware/uploadCloudinary.js'
+import uploadCloudinary from '../middlewares/uploads.js'
 import {login, me, register} from '../controllers/authentication.controller.js'
 const authenticationRouter = express.Router()
 
-authenticationRouter.post('/register', register)// da aggiungere uploadCloudinary.single('avatar')
+authenticationRouter.post('/register', uploadCloudinary.single('avatar'), register)// da aggiungere uploadCloudinary.single('avatar')
 authenticationRouter.post('/login', login)
 authenticationRouter.get('/me',authorization, me)
 

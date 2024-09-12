@@ -19,7 +19,8 @@ function MyNav() {
         surname: "",
         email: "",
         password: "",
-        age: ""
+        avatar: null,
+        /* age: "" */
     };
     const [regFormValue, setRegFormValue] = useState(initialRegistrationFormValue);
     const [avatar, setAvatar] = useState(null);
@@ -42,7 +43,7 @@ function MyNav() {
     }
 
     const res = await register(regFormValue, avatar);
-    if (res && res.token) {
+    if (res) {
         handleCloseReg();
         setRegFormValue(initialRegistrationFormValue);
         setAvatar(null);
@@ -89,10 +90,10 @@ function MyNav() {
                         </div>
 
                         <div className="d-flex flex-column align-items-center">
-                            <NavDropdown title={<img src={selectedUser?.image} alt="" className="rounded-circle1" />} id="collapsible-nav-dropdown">
+                            <NavDropdown title={<img src={selectedUser?.avatar} alt="" className="rounded-circle1" />} id="collapsible-nav-dropdown">
                                 <NavDropdown.Item className="dropDownItem xm">
                                     <div className="d-flex">
-                                        <img src={selectedUser?.image} className="rounded-circle2" alt="" />
+                                        <img src={selectedUser?.avatar} className="rounded-circle2" alt="" />
                                         <div className="d-flex flex-column mx-2">
                                             <p className="dropDownName">{selectedUser?.name} {selectedUser?.surname}</p>
                                             <span className="dropDownTitle">{selectedUser?.title}</span>
@@ -156,7 +157,7 @@ function MyNav() {
                 <div className="d-flex">
                     {!token && <Button className="ms-3" variant="secondary" onClick={handleShowReg}>Register</Button>}
                     {token && <Button className="ms-2 me-2 logout" variant="primary" onClick={handleLogout}>Logout</Button>}
-                    {selectedUser && <Image src={selectedUser.image} className="userAvatar me-2" />}
+                    {selectedUser && <Image src={selectedUser.avatar} className="userAvatar me-2" />}
                 </div>
             </Container>
         </Navbar>

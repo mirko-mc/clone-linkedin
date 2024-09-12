@@ -1,8 +1,8 @@
 // fetchUrls.js
 
-export const apiBaseUrl = 'http://localhost:5000/api'; 
+export const apiBaseUrl = 'http://localhost:5000/'; 
 
-export const getMeUrl = `${apiBaseUrl}/profile/me`;
+export const getMeUrl = `${apiBaseUrl}auth/me`;
 export const getProfileUrl = `${apiBaseUrl}/profile`;
 export const putProfileUrl = `${apiBaseUrl}/profile`;
 
@@ -40,7 +40,8 @@ export const register = async (regFormValue, avatar) => {
     formData.append('email', regFormValue.email);
     formData.append('password', regFormValue.password);
     /* formData.append('age', regFormValue.age); */
-
+    console.log(formData);
+    
     try {
         const res = await fetch(registerUrl, {
             method: 'POST',
@@ -49,6 +50,7 @@ export const register = async (regFormValue, avatar) => {
         if (res.ok) {
             const data = await res.json();
             return data;
+            
         } else {
             const errorData = await res.json();
             return { error: errorData.message };
