@@ -1,6 +1,6 @@
 // fetchUrls.js
 
-export const apiBaseUrl = 'http://localhost:5000/api'; // Modifica questo con l'URL del tuo backend
+export const apiBaseUrl = 'http://localhost:5000/api'; 
 
 export const getMeUrl = `${apiBaseUrl}/profile/me`;
 export const getProfileUrl = `${apiBaseUrl}/profile`;
