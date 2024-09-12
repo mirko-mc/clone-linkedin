@@ -1,24 +1,25 @@
-export const getMeUrl = 'https://striveschool-api.herokuapp.com/api/profile/me'
+// fetchUrls.js
 
-export const getProfileUrl = 'https://striveschool-api.herokuapp.com/api/profile'
-// getProfileUrl si può usare anche per ottenere l'elenco delle esperienze così:
-// GET https://striveschool-api.herokuapp.com/api/profile/:userId/experiences
+export const apiBaseUrl = 'http://localhost:5000/api'; // Modifica questo con l'URL del tuo backend
 
-// getProfileUrl si può usare anche per scrivere una nuova esperienza così:
-// POST https://striveschool-api.herokuapp.com/api/profile/:userId/experiences
+export const getMeUrl = `${apiBaseUrl}/profile/me`;
+export const getProfileUrl = `${apiBaseUrl}/profile`;
+export const putProfileUrl = `${apiBaseUrl}/profile`;
 
-export const putProfileUrl = 'https://striveschool-api.herokuapp.com/api/profile'
-
+// URL per login e registrazione
+export const loginUrl = 'http://localhost:5000/auth/login';
+export const registerUrl = 'http://localhost:5000/auth/register';
+export const meUrl = 'http://localhost:5000/auth/me';
 
 export const login = async (formValue) => {
     try {
-        const res = await fetch('http://localhost:5000/api/v1/auth/login', { //DA METTERE LE GIUSTE URL
+        const res = await fetch(loginUrl, {
             headers: {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
             body: JSON.stringify(formValue)
-        })
+        });
         if (res.ok) {
             const data = await res.json();
             return data;
@@ -29,42 +30,43 @@ export const login = async (formValue) => {
     } catch (error) {
         return { error: error.message };
     }
-}
+};
 
+export const register = async (regFormValue, avatar) => {
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    formData.append('name', regFormValue.name);
+    formData.append('surname', regFormValue.surname);
+    formData.append('email', regFormValue.email);
+    formData.append('password', regFormValue.password);
+    /* formData.append('age', regFormValue.age); */
+
+    try {
+        const res = await fetch(registerUrl, {
+            method: 'POST',
+            body: formData
+        });
+        if (res.ok) {
+            const data = await res.json();
+            return data;
+        } else {
+            const errorData = await res.json();
+            return { error: errorData.message };
+        }
+    } catch (error) {
+        return { error: error.message };
+    }
+};
 
 export const me = async () => {
-    const res = await fetch('http://localhost:5000/api/v1/auth/me',  //DA METTERE LE GIUSTE URL
-        {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
+    const res = await fetch(meUrl, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
-    );
+    });
     if (!res.ok) {
         throw new Error(res.status);
     }
     const data = await res.json();
     return data;
-}
-
-export const register = async (regFormValue, avatar) => {
-    const formData = new FormData()
-    formData.append('avatar', avatar)
-    formData.append('name', regFormValue.name)
-    formData.append('surname', regFormValue.surname)
-    formData.append('email', regFormValue.email)
-    formData.append('password', regFormValue.password)
-    formData.append('età', regFormValue.eta)
-    /* console.log(formData) */
-    try {
-        const res = await fetch('http://localhost:5000/api/v1/auth/register', { //DA METTERE LE GIUSTE URL
-            method: 'POST',
-            body: formData
-        })
-        const data = await res.json();
-        return data
-    } catch (error) {
-        console.log(error)
-    }
-
-}
+};
