@@ -1,4 +1,3 @@
-import ExperiencesSchema from "../models/experiences.schema.js";
 import ProfileSchema from "../models/Profile.schema.js";
 
 // TODO GET /:userld/experiences => ritorna TUTTE le esperienze di un utente
@@ -14,7 +13,7 @@ export const GetAllExperiences = async (req, res) => {
     res.send(Profile.experiences);
   } catch (err) {
     console.log(err);
-    res.send({ message: "get all experiences error" });
+    res.send({ message: "get all experiences ERROR" });
   }
 };
 // TODO GET /me/experiences => ritorna le esperienze dell'utente loggato
@@ -30,7 +29,7 @@ export const GetLoggedUserExperiences = async (req, res) => {
     res.send(Profile.experiences);
   } catch (err) {
     console.log(err);
-    res.send({ message: "get profile experience error" });
+    res.send({ message: "get profile experience ERROR" });
   }
 };
 // TODO POST /experiences => crea una nuova esperienza per l'utente loggato
@@ -65,7 +64,7 @@ export const PostNewExperience = async (req, res) => {
     res.send({ message: "experience added" });
   } catch (err) {
     console.log(err);
-    res.send({ message: "create experience error" });
+    res.send({ message: "create experience ERROR" });
   }
 };
 // TODO PATCH /:userId/experiences/:expId => caricamento immagine per esperienza
@@ -74,13 +73,18 @@ export const PatchUploadExperienceImage = async (req, res) => {
   console.log("experiences.controller.js - PutUploadExperienceImage");
   try {
     /** recupero dal database la scheda del profilo tramite l'id nella barra degli indirizzi */
-    await ExperiencesSchema.findByIdAndUpdate(req.params.expId, {
-      avatar: req.file.path,
-    });
+    const Profile = await ProfileSchema.findById(req.params.userId)
+    /** recupero l'esperienza da patchare */
+    const Experience = Profile.experiences.id(req.params.expId);
+    /** aggiorno l'immagine */
+    Experience.image = req.file.path;
+    // Experience.image = req.body.image;
+    /** salvo il profilo con l'immagine aggiornata */
+    Profile.save();
     res.send({ message: "image updated" });
   } catch (err) {
     console.log(err);
-    res.send({ message: "update image experience error" });
+    res.send({ message: "update image experience ERROR" });
   }
 };
 // TODO EX : PUT /:userId/experiences/:expId => modifica le esperienze
@@ -106,7 +110,7 @@ export const PutUpdateExperience = async (req, res) => {
     res.send({ message: "experiences edited" });
   } catch (err) {
     console.log(err);
-    res.send({ message: "update experience error" });
+    res.send({ message: "update experience ERROR" });
   }
 };
 // TODO EX : DELETE /:userId/experiences/:expId => elimina le esperienze
@@ -131,6 +135,6 @@ export const DeleteExperience = async (req, res) => {
     res.send({ message: "experiences deleted" });
   } catch (err) {
     console.log(err);
-    res.send({ message: "delete experience error" });
+    res.send({ message: "delete experience ERROR" });
   }
 };
