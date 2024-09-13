@@ -7,9 +7,10 @@ import helmet from "helmet";
 import endpoints from "express-list-endpoints";
 import ExperiencesRouter from "./routes/experiences.routes.js";
 import ProfileRouter from "./routes/profileRoutes.js";
-import authenticationRouter from './routes/authenticationRoutes.js'
-import passport from 'passport';
-import googleStrategy from './config/passport.config.js';
+import authenticationRouter from "./routes/authenticationRoutes.js";
+import passport from "passport";
+import googleStrategy from "./config/passport.config.js";
+import authorization from "./middlewares/authorization.js";
 // import authorization from './middleware/authorization.js';
 
 // * configuro il server
@@ -44,11 +45,11 @@ Server.use(cors());
 Server.use(express.json());
 // * rotte
 
-passport.use('google', googleStrategy)//non è un middleware ma serve per dire a passport di usare la strategia
+passport.use("google", googleStrategy); //non è un middleware ma serve per dire a passport di usare la strategia
 
-Server.use("/api/v1", ExperiencesRouter);
-Server.use("/api/v1/profiles", ProfileRouter);
-Server.use("/auth",authenticationRouter)//rotta per l'autenticazione
+Server.use("/api/v1", authorization, ExperiencesRouter);
+Server.use("/api/v1/profiles", authorization, ProfileRouter);
+Server.use("/auth", authenticationRouter); //rotta per l'autenticazione
 // * connessione al database
 await mongoose
   .connect(process.env.MONGO_CONNECTION_URI)
@@ -60,6 +61,6 @@ await mongoose
   });
 /** avvio il server mettendolo in ascolto sulla porta dichiarata */
 Server.listen(Port, () => {
-  console.log(`Server avviato su ${Host}`);
+  console.log(`Server avviato su ${Host}:${Port}`);
   console.table(endpoints(Server));
 });

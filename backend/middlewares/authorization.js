@@ -25,7 +25,7 @@ export default (req, res, next) =>{
         //aggiungiamo i dati dell'utente loggato all'oggetto req in maniera da
         //essere utilizzabili dai middlwares successivi in caso ne avessero bisogno
         req.loggedUser = user
-        console.log(user)
+        console.log("authorization",user)
 
         //chiamiamo il prossimo middleware
         next()

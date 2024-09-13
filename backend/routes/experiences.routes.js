@@ -16,17 +16,17 @@ ExperiencesRouter.get(
 ExperiencesRouter.post("/experiences", ExperiencesController.PostNewExperience);
 // TODO PATCH /:userId/experiences/:expId => caricamento immagine per esperienza
 ExperiencesRouter.patch(
-  "/:userId/experiences/:expId",
+  "/experiences/:expId",
   ExperiencesController.PatchUploadExperienceImage
 );
 // TODO EX : PUT /:userId/experiences/:expId => modifica le esperienze
 ExperiencesRouter.put(
-  "/:userId/experiences/:expId",
+  "/experiences/:expId",
   ExperiencesController.PutUpdateExperience
 );
 // TODO EX : DELETE /:userId/experiences/:expId => elimina le esperienze
 ExperiencesRouter.delete(
-  "/:userId/experiences/:expId",
+  "/experiences/:expId",
   ExperiencesController.DeleteExperience
 );
 export default ExperiencesRouter;
