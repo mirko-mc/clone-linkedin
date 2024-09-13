@@ -22,7 +22,7 @@ export const GetLoggedUserExperiences = async (req, res) => {
   console.log("experiences.controller.js - GetLoggedUserExperiences");
   try {
     /** recupero dal database la scheda del profilo tramite l'id nella barra degli indirizzi */
-    const Profile = await ProfileSchema.findById(req.loggedUser.userId);
+    const Profile = await ProfileSchema.findById(req.loggedUser.id);
     /** controllo che il profilo esista */
     if (!Profile) throw new Error({ message: "profile not found" });
     /** invio all'utente le esperienze del profilo */
@@ -38,8 +38,7 @@ export const PostNewExperience = async (req, res) => {
   console.log("*** experiences.controller.js - PostNewExperience ***");
   try {
     /** recupero dal database la scheda del profilo tramite l'id nella barra degli indirizzi */
-    // * const Profile = await ExperiencesSchema.findById(req.loggedUser.userId);
-    const Profile = await ProfileSchema.findById("66e1daf1158b9ea673101bc3");
+    const Profile = await ProfileSchema.findById(req.loggedUser.id);
     /** controllo che il profilo esista */
     if (!Profile) throw new Error({ message: "profile not found" });
     /** controllo se i campi required sono soddisfatti altrimenti termino la funzione restituendo errore  */
@@ -47,11 +46,9 @@ export const PostNewExperience = async (req, res) => {
     if (!req.body.company) throw new Error({ message: "company required" });
     if (!req.body.startDate) throw new Error({ message: "startDate required" });
     if (!req.body.area) throw new Error({ message: "area required" });
-    if (!req.body.userId) throw new Error({ message: "profileId required" });
     /** pusho l'oggetto specificando uno ad uno i campi per avere la certezza che nel database non arrivino dati indesiderati */
-    // * userId: req.loggedUser.userId,
     Profile.experiences.push({
-      userId: "66e1daf1158b9ea673101bc3",
+      userId: req.loggedUser.id,
       role: req.body.role,
       company: req.body.company,
       startDate: req.body.startDate,
@@ -63,17 +60,17 @@ export const PostNewExperience = async (req, res) => {
     await Profile.save();
     res.send({ message: "experience added" });
   } catch (err) {
-    console.log(err);
-    res.send({ message: "create experience ERROR" });
+    console.log("errore", err.message);
+    res.send({ message: `create experience ERROR` });
   }
 };
-// TODO PATCH /:userId/experiences/:expId => caricamento immagine per esperienza
+// TODO PATCH /experiences/:expId => caricamento immagine per esperienza
 export const PatchUploadExperienceImage = async (req, res) => {
   // !!! console log da eliminare
   console.log("experiences.controller.js - PutUploadExperienceImage");
   try {
     /** recupero dal database la scheda del profilo tramite l'id nella barra degli indirizzi */
-    const Profile = await ProfileSchema.findById(req.params.userId)
+    const Profile = await ProfileSchema.findById(req.loggedUser.id);
     /** recupero l'esperienza da patchare */
     const Experience = Profile.experiences.id(req.params.expId);
     /** aggiorno l'immagine */
@@ -93,8 +90,8 @@ export const PutUpdateExperience = async (req, res) => {
   console.log("experiences.controller.js - PutUpdateExperience");
   try {
     /** recupero il profilo dal database tramite l'id nella barra degli indirizzi */
-    // const Profile = await ProfileSchema.findById(req.loggedUser.userId);
-    const Profile = await ProfileSchema.findById("66e1daf1158b9ea673101bc3");
+    const Profile = await ProfileSchema.findById(req.loggedUser.id);
+    // const Profile = await ProfileSchema.findById("66e1daf1158b9ea673101bc3");
     /** recupero l'esperienza dal database */
     const Experience = Profile.experiences.id(req.params.expId);
     /** controllo che l'esperienza esista */
@@ -118,8 +115,8 @@ export const DeleteExperience = async (req, res) => {
   // !!! console log da eliminare
   console.log("experiences.controller.js - DeleteExperience");
   try {
-    // const Profile = await ProfileSchema.findById(req.loggedUser.userId);
-    const Profile = await ProfileSchema.findById("66e1daf1158b9ea673101bc3");
+    const Profile = await ProfileSchema.findById(req.loggedUser.id);
+    // const Profile = await ProfileSchema.findById("66e1daf1158b9ea673101bc3");
     /** se il profilo non esiste termino la funzione restituendo errore */
     if (!Profile) throw new Error({ message: "profile not found" });
     /** recupero l'esperienza */

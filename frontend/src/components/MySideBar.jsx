@@ -2,55 +2,53 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import './MySideBar.css';
+import "./MySideBar.css";
 import { Container } from "react-bootstrap";
-import { UserContext } from './contexts/UserContextProvider'; // Importa il contesto
+import { UserContext } from "./contexts/UserContextProvider"; // Importa il contesto
+import { getAllProfiles } from "../fetchUrls";
 
 function MySideBar() {
   const [data, setData] = useState([]);
-  const apiKey = process.env.REACT_APP_APIKEY;
   const { token } = useContext(UserContext); // Accedi al token dal contesto
 
   useEffect(() => {
     if (token) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(
-            `https://striveschool-api.herokuapp.com/api/profile/`,
-            {
-              headers: {
-                Authorization: apiKey
-              },
-            }
-          );
-          const result = await response.json();
-          setData(result);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchData();
+      getAllProfiles().then((getAllProfilesData) => setData(getAllProfilesData));
+      // const fetchData = async () => {
+      //   try {
+      //     const response = await fetch(
+      //       `https://striveschool-api.herokuapp.com/api/profile/`,
+      //       {
+      //         headers: {
+      //           Authorization: apiKey
+      //         },
+      //       }
+      //     );
+      //     const result = await response.json();
+      //     setData(result);
+      //   } catch (error) {
+      //     console.error("Error fetching data:", error);
+      //   }
+      // };
+      // fetchData();
     }
   }, [token]); // Eseguo fetch solo se c'è il token
 
   return (
     <Container id="sideContainer">
       <div>
-        <p><b>Altri profili simili</b></p>
-        {data.slice(412, 422).map((profile, index) => (
-          <section
-            key={index}
-            className="profiliSimili"
-          >
+        <p>
+          <b>Altri profili simili</b>
+        </p>
+        {data.map((profile, index) => (
+          <section key={index} className="profiliSimili">
             <div className="d-flex">
               <Image
-                src={profile.image}
+                src={profile.avatar}
                 roundedCircle
                 className="me-3 imgProfile"
               />
-              <div
-                className="d-flex flex-column justify-content-between containerText"
-              >
+              <div className="d-flex flex-column justify-content-between containerText">
                 <div>
                   <p className="nameProfile">
                     {profile.name} {profile.surname}
